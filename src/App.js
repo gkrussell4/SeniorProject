@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { getDates, Volume } from "./algorithms.js";
+import { getDates, Volume, performanceFunction } from "./algorithms.js";
 
 function App() {
   const ticker_list = [
@@ -71,14 +71,13 @@ function App() {
       dates = getDates(time_slice, data);
     } else {
       dates = getDates(time_slice, data);
-      console.log(dates);
-      //performance(time_slice, data);
+      //console.log(dates);
     }
 
     let volume = Volume(time_slice, data);
-    console.log(volume[0].get("date"), volume[0].get("volume"));
-    console.log(volume[1].get("date"), volume[1].get("volume"));
-    console.log(volume[2]);
+    let performance = performanceFunction(time_slice, data);
+    console.log(performance[0].get("date"), performance[0].get("percent"));
+    console.log(performance[1].get("date"), performance[1].get("percent"));
   };
 
   return (
