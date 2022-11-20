@@ -122,7 +122,7 @@ table
 time_slice      performance (of time slice)      volume 
 
 object 2:
-chart of object 1
+chart of object 1, some charts
 
 object 3:
 box
