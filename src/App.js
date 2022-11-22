@@ -156,15 +156,41 @@ function App() {
       <button type="button" onClick={submit}>
         Submit
       </button>
-      <p>{"best date: " + bestPerfTime}</p>
-      <p>{"best: " + bestPerformance}</p>
-      <p>{"worst date: " + worstPerfTime}</p>
-      <p>{"worst: " + worstPerformance}</p>
-      <p>{"highest vol date: " + HighVolTime}</p>
-      <p>{"highest volume: " + maxVolume}</p>
-      <p>{"lowest vol date: " + MinVolTime}</p>
-      <p>{"lowest volume: " + minVolume}</p>
-      <p></p>
+      <div className = "app-container">
+        <table>
+          <thead>
+            <tr>
+              <th>{ticker_select} Summary for {time_frame_select}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{"Best Date: " + bestPerfTime}</td>
+            </tr>
+            <tr>
+              <td>{"Best: " + bestPerformance}</td>
+            </tr>
+              <td>{"Worst Date: " + worstPerfTime}</td>
+            <tr>
+            </tr>
+              <td>{"Worst: " + worstPerformance}</td>
+            <tr>
+            </tr>
+              <td>{"Highest Volume Date: " + HighVolTime}</td>
+            <tr>
+            </tr>
+              <td>{"Highest Volume: " + maxVolume}</td>
+            <tr>
+            </tr>
+              <td>{"Lowest Volume Date: " + MinVolTime}</td>
+            <tr>
+            </tr>
+              <td>{"Lowest Volume: " + minVolume}</td>
+            <tr>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
