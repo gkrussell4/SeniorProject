@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: rgb(255, 255, 255);
+  color: white;
 }
 
 .App-link {
@@ -42,26 +42,30 @@
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
+  justify-content: flex-end;
 }
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
 }
 
-th,td {
+th,
+td {
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
   font-size: 32px;
+  color: white;
 }
 
 th {
-  background-color: rgb(117, 201, 250);
+  background-color: rgb(15, 3, 59);
+  text-align: center;
 }
 
 td {
-  background-color: rgb(205, 235, 253);
+  background-color: rgb(15, 3, 59);
 }
 
 form {
