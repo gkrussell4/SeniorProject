@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { getDates, Volume, performanceFunction } from "./algorithms.js";
+import "./App.css";
 
 function App() {
   const ticker_list = [
@@ -67,6 +68,7 @@ function App() {
     const data = await response.json();
     console.log(data);
 
+    
     if (time_slice == "Daily" || time_slice == "Weekly") {
       dates = getDates(time_slice, data);
     } else {
@@ -75,9 +77,10 @@ function App() {
     }
 
     let volume = Volume(time_slice, data);
-    let performance = performanceFunction(time_slice, data);
-    console.log(performance[0].get("date"), performance[0].get("percent"));
-    console.log(performance[1].get("date"), performance[1].get("percent"));
+    // let performance = performanceFunction(time_slice, data);
+    // console.log(performance[0].get("date"), performance[0].get("percent"));
+    // console.log(performance[1].get("date"), performance[1].get("percent"));
+    console.table(volume[2]);
   };
 
   return (
@@ -109,6 +112,22 @@ function App() {
         <p>{ticker_select}</p>
         <p>{time_frame_select}</p>
       </form>
+      <div className = "app-container">
+        <table>
+          <thead>
+            <th>Time Slice</th>
+            <th>Performance</th>
+            <th>Volume</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Test</td>
+              <td>Test</td>
+              <td>Test</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
