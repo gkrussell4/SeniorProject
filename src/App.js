@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { getDates, Volume, performanceFunction } from "./algorithms.js";
+
+import "./App.css";
+
 import Select from "react-select";
 
 function App() {
@@ -26,6 +29,8 @@ function App() {
 
   const [ticker_select, setTicker] = useState(ticker_list[0]);
   const [time_frame_select, setTimeFrame] = useState(time_frame[0]);
+  const [volume, setVolume] = useState(null);
+  const [submitted, setSubmit] = useState(false);
   let dates = [];
   let url = ``;
   let time_slice = "";
@@ -60,6 +65,7 @@ function App() {
     const data = await response.json();
     console.log(data);
 
+
     //  testing algos for functionality
     // let volume = Volume(time_slice, data);
     // let performance = performanceFunction(time_slice, data);
@@ -88,6 +94,7 @@ function App() {
       </button>
       <p>{ticker_select}</p>
       <p>{time_frame_select}</p>
+
     </div>
   );
 }

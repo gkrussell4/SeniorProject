@@ -1,0 +1,34 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+2 info using npm@6.14.4
+3 info using node@v10.19.0
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle diy-stock-analysis@0.1.0~prestart: diy-stock-analysis@0.1.0
+6 info lifecycle diy-stock-analysis@0.1.0~start: diy-stock-analysis@0.1.0
+7 verbose lifecycle diy-stock-analysis@0.1.0~start: unsafe-perm in lifecycle true
+8 verbose lifecycle diy-stock-analysis@0.1.0~start: PATH: /usr/share/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/kcirde1998/test/SeniorProject/node_modules/.bin:/home/kcirde1998/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.UbuntuonWindows_2004.2022.1.0_x64__79rhkp1fndgsc:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/santo/AppData/Local/Microsoft/WindowsApps:/mnt/c/Modeltech_pe_edu_10.4a/win32pe_edu:/mnt/c/Users/santo/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+9 verbose lifecycle diy-stock-analysis@0.1.0~start: CWD: /home/kcirde1998/test/SeniorProject
+10 silly lifecycle diy-stock-analysis@0.1.0~start: Args: [ '-c', 'react-scripts start' ]
+11 silly lifecycle diy-stock-analysis@0.1.0~start: Returned: code: 1  signal: null
+12 info lifecycle diy-stock-analysis@0.1.0~start: Failed to exec start script
+13 verbose stack Error: diy-stock-analysis@0.1.0 start: `react-scripts start`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/usr/share/npm/node_modules/npm-lifecycle/index.js:332:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid diy-stock-analysis@0.1.0
+15 verbose cwd /home/kcirde1998/test/SeniorProject
+16 verbose Linux 4.4.0-19041-Microsoft
+17 verbose argv "/usr/bin/node" "/usr/bin/npm" "start"
+18 verbose node v10.19.0
+19 verbose npm  v6.14.4
+20 error code ELIFECYCLE
+21 error errno 1
+22 error diy-stock-analysis@0.1.0 start: `react-scripts start`
+22 error Exit status 1
+23 error Failed at the diy-stock-analysis@0.1.0 start script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]
