@@ -34,6 +34,8 @@ function App() {
 
   const [ticker_select, setTicker] = useState(ticker_list[0]);
   const [time_frame_select, setTimeFrame] = useState(time_frame[0]);
+  const [volume, setVolume] = useState(null);
+  const [submitted, setSubmit] = useState(false);
   let dates = [];
   let url = ``;
   let time_slice = "";
@@ -76,11 +78,15 @@ function App() {
       //console.log(dates);
     }
 
-    let volume = Volume(time_slice, data);
+    
+    let vol = Volume(time_slice, data);
+    setVolume(vol);
     // let performance = performanceFunction(time_slice, data);
     // console.log(performance[0].get("date"), performance[0].get("percent"));
     // console.log(performance[1].get("date"), performance[1].get("percent"));
-    console.table(volume[2]);
+    //console.table(vol[2]);
+    //console.table(volume[2]);
+    setSubmit(true);
   };
 
   return (
@@ -120,13 +126,19 @@ function App() {
             <th>Volume</th>
           </thead>
           <tbody>
-            <tr>
-              <td>Test</td>
-              <td>Test</td>
-              <td>Test</td>
-            </tr>
+            {submitted && <tr> 
+            <td>Test</td>
+            <td>Test</td>
+            <td> {volume[2][1]}</td>
+             </tr>
+            }
           </tbody>
         </table>
+        {submitted && 
+              volume[2].map(function(vol, i){ 
+                console.log(vol)
+              })
+             }
       </div>
     </div>
   );
