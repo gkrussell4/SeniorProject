@@ -1,26 +1,21 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { getDates, Volume, performanceFunction } from "./algorithms.js";
+
 import "./App.css";
 
+import Select from "react-select";
+
 function App() {
-  const ticker_list = [
-    "AAPL",
-    "IBM",
-    "AMZN",
-    "GOOG",
-    "TSLA",
-    "PEP",
-    "COST",
-    "META",
-    "AVGO",
-    "CSCO",
-    "NFLX",
-    "INTC",
-    "PYPL",
-    "NVDA",
-    "UNH",
-  ];
+  //add more to ticker list later
+  const ticker_list = ["AAPL", "NVDA", "IBM", "UNH"];
+
+  //formatting output for list
+  const ticker_list_display = [];
+  ticker_list.forEach(function (element) {
+    ticker_list_display.push({ label: element, value: element });
+  });
+
   const time_frame = [
     "5 Minute",
     "15 Minute",
@@ -43,23 +38,23 @@ function App() {
   const submit = async (e) => {
     e.preventDefault();
 
-    if (time_frame_select == "5 Minute") {
+    if (time_frame_select === "5 Minute") {
       time_slice = "5min";
-    } else if (time_frame_select == "15 Minute") {
+    } else if (time_frame_select === "15 Minute") {
       time_slice = "15min";
-    } else if (time_frame_select == "30 Minute") {
+    } else if (time_frame_select === "30 Minute") {
       time_slice = "30min";
-    } else if (time_frame_select == "60 Minute") {
+    } else if (time_frame_select === "60 Minute") {
       time_slice = "60min";
-    } else if (time_frame_select == "Daily") {
+    } else if (time_frame_select === "Daily") {
       time_slice = "Daily";
     } else {
       time_slice = "Weekly";
     }
 
-    if (time_slice == "Daily") {
+    if (time_slice === "Daily") {
       url = `${API_REQUEST_BASE}TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker_select}&apikey=0X7FGLTBB3E4SVWG`;
-    } else if (time_slice == "Weekly") {
+    } else if (time_slice === "Weekly") {
       url = `${API_REQUEST_BASE}TIME_SERIES_WEEKLY_ADJUSTED&symbol=${ticker_select}&apikey=0X7FGLTBB3E4SVWG`;
     } else {
       url = `${API_REQUEST_BASE}TIME_SERIES_INTRADAY&symbol=${ticker_select}&interval=${time_slice}&outputsize=full&apikey=0X7FGLTBB3E4SVWG`;
@@ -70,76 +65,36 @@ function App() {
     const data = await response.json();
     console.log(data);
 
-    
-    if (time_slice == "Daily" || time_slice == "Weekly") {
-      dates = getDates(time_slice, data);
-    } else {
-      dates = getDates(time_slice, data);
-      //console.log(dates);
-    }
 
-    
-    let vol = Volume(time_slice, data);
-    setVolume(vol);
+    //  testing algos for functionality
+    // let volume = Volume(time_slice, data);
     // let performance = performanceFunction(time_slice, data);
     // console.log(performance[0].get("date"), performance[0].get("percent"));
     // console.log(performance[1].get("date"), performance[1].get("percent"));
-    //console.table(vol[2]);
-    //console.table(volume[2]);
-    setSubmit(true);
   };
 
   return (
-    <div>
-      <form>
-        <select
-          value={ticker_select}
-          onChange={(e) => setTicker(e.target.value)}
-        >
-          {ticker_list.map((value) => (
-            <option value={value} key={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <select
-          value={time_frame_select}
-          onChange={(e) => setTimeFrame(e.target.value)}
-        >
-          {time_frame.map((value) => (
-            <option value={value} key={value}>
-              {value}
-            </option>
-          ))}
-        </select>
-        <button type="button" onClick={submit}>
-          Submit
-        </button>
-        <p>{ticker_select}</p>
-        <p>{time_frame_select}</p>
-      </form>
-      <div className = "app-container">
-        <table>
-          <thead>
-            <th>Time Slice</th>
-            <th>Performance</th>
-            <th>Volume</th>
-          </thead>
-          <tbody>
-            {submitted && <tr> 
-            <td>Test</td>
-            <td>Test</td>
-            <td> {volume[2][1]}</td>
-             </tr>
-            }
-          </tbody>
-        </table>
-        {submitted && 
-              volume[2].map(function(vol, i){ 
-                console.log(vol)
-              })
-             }
-      </div>
+    <div className="App">
+      <Select
+        options={ticker_list_display}
+        onChange={(opt) => setTicker(opt.value)}
+      ></Select>
+      <select
+        value={time_frame_select}
+        onChange={(e) => setTimeFrame(e.target.value)}
+      >
+        {time_frame.map((value) => (
+          <option value={value} key={value}>
+            {value}
+          </option>
+        ))}
+      </select>
+      <button type="button" onClick={submit}>
+        Submit
+      </button>
+      <p>{ticker_select}</p>
+      <p>{time_frame_select}</p>
+
     </div>
   );
 }

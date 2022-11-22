@@ -1,6 +1,6 @@
 export function getDates(time_slice, data) {
   let parsed = [];
-  if (time_slice == "Weekly") {
+  if (time_slice === "Weekly") {
     for (var key in data["Weekly Adjusted Time Series"]) {
       parsed.unshift(key);
     }
@@ -13,7 +13,7 @@ export function getDates(time_slice, data) {
 
 //highest/lowest index
 export function Volume(time_slice, data) {
-  if (time_slice == "Daily" || time_slice == "Weekly") {
+  if (time_slice === "Daily" || time_slice === "Weekly") {
     return; //no volume returned in API
   } else {
     var parsed = [];
