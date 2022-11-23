@@ -41,7 +41,7 @@ function App() {
   const [maxVolume, setMaxVolume] = useState(null);
   const [minVolume, setMinVolume] = useState(null);
   const [summaryData, setSummaryData] = useState(null);
-  const [submitted, setSubmit] = useState(false);
+  const [displaySummary, setSummaryDisplay] = useState(false);
 
   const getDateSlice = async () => {
     //fetching data
@@ -135,14 +135,16 @@ function App() {
       });
       const minVDate = display_date_slice[minVIndex];
       setMinVolTime(minVDate);
+      setSummaryData({bpt: bestPDate, bp: bestPerfAppended,wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol})
+      setSummaryDisplay(true)
     } else {
       setHighVolTime("API does not return volume data for Daily");
       setMaxVolume("API does not return volume data for Daily");
       setMinVolTime("API does not return volume data for Daily");
       setMinVolume("API does not return volume data for Daily");
     }
-    setSummaryData({bpt: bestPerfTime, bp: bestPerformance,wpt: worstPerfTime, wp: worstPerformance, hvt: HighVolTime, hv: maxVolume, mvt: MinVolTime, mv: minVolume})
-    setSubmit(true)
+    
+   
   };
 
   return (
@@ -165,7 +167,7 @@ function App() {
         Submit
       </button>
       <div className="app-container">
-      {submitted && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
+      {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
         {/* <table>
           <thead>
             <tr>
