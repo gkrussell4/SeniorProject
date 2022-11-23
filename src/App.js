@@ -86,11 +86,13 @@ function App() {
 
     //get/set best performance
     const bestPerf = Math.max(...get_performance_slice);
-    setBestPerformance(bestPerf);
+    var bestPerfAppended = bestPerf.toPrecision(3);
+    setBestPerformance(bestPerfAppended);
 
     //get/set worst performance
     var worstPerf = Math.min(...get_performance_slice);
-    setWorstPerformance(worstPerf);
+    var worstPerfAppended = worstPerf.toPrecision(3);
+    setWorstPerformance(worstPerfAppended);
 
     //get/set best time_slice
     const BestPindex = get_performance_slice.findIndex((object) => {
@@ -128,12 +130,10 @@ function App() {
       const minVDate = display_date_slice[minVIndex];
       setMinVolTime(minVDate);
     } else {
-      //reset volume to null
-      const temp = null;
-      setHighVolTime(temp);
-      setMaxVolume(temp);
-      setHighVolTime(temp);
-      setMinVolume(temp);
+      setHighVolTime("API does not return volume data for Daily");
+      setMaxVolume("API does not return volume data for Daily");
+      setMinVolTime("API does not return volume data for Daily");
+      setMinVolume("API does not return volume data for Daily");
     }
   };
 
@@ -156,11 +156,13 @@ function App() {
       <button type="button" onClick={submit}>
         Submit
       </button>
-      <div className = "app-container">
+      <div className="app-container">
         <table>
           <thead>
             <tr>
-              <th>{ticker_select} Summary for {time_frame_select}</th>
+              <th>
+                {ticker_select} Summary for {time_frame_select}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -168,26 +170,20 @@ function App() {
               <td>{"Best Date: " + bestPerfTime}</td>
             </tr>
             <tr>
-              <td>{"Best: " + bestPerformance}</td>
+              <td>{"Best: " + bestPerformance + "%"}</td>
             </tr>
-              <td>{"Worst Date: " + worstPerfTime}</td>
-            <tr>
-            </tr>
-              <td>{"Worst: " + worstPerformance}</td>
-            <tr>
-            </tr>
-              <td>{"Highest Volume Date: " + HighVolTime}</td>
-            <tr>
-            </tr>
-              <td>{"Highest Volume: " + maxVolume}</td>
-            <tr>
-            </tr>
-              <td>{"Lowest Volume Date: " + MinVolTime}</td>
-            <tr>
-            </tr>
-              <td>{"Lowest Volume: " + minVolume}</td>
-            <tr>
-            </tr>
+            <td>{"Worst Date: " + worstPerfTime}</td>
+            <tr></tr>
+            <td>{"Worst: " + worstPerformance + "%"}</td>
+            <tr></tr>
+            <td>{"Highest Volume Date: " + HighVolTime}</td>
+            <tr></tr>
+            <td>{"Highest Volume: " + maxVolume}</td>
+            <tr></tr>
+            <td>{"Lowest Volume Date: " + MinVolTime}</td>
+            <tr></tr>
+            <td>{"Lowest Volume: " + minVolume}</td>
+            <tr></tr>
           </tbody>
         </table>
       </div>
