@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -35,4 +35,49 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  justify-content: flex-end;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 32px;
+  color: white;
+}
+
+th {
+  background-color: rgb(15, 3, 59);
+  text-align: center;
+}
+
+td {
+  background-color: rgb(15, 3, 59);
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
 }
