@@ -33,7 +33,7 @@ function App() {
   const [worstPerformance, setWorstPerformance] = useState(null);
   const [volume_slices, setVolumeSlices] = useState(null);
   const [HighVolTime, setHighVolTime] = useState(null);
-  const [MinVolTime, setMinVolTime] = useState(null);
+  const [minVolTime, setMinVolTime] = useState(null);
   const [maxVolume, setMaxVolume] = useState(null);
   const [minVolume, setMinVolume] = useState(null);
 
@@ -79,6 +79,7 @@ function App() {
     //get/set date slices
     const display_date_slice = await getDateSlice();
     setDateSlices(display_date_slice);
+    console.log(display_date_slice);
 
     //get/set performance array
     const get_performance_slice = await getPerformanceSlice();
@@ -182,11 +183,27 @@ function App() {
               <td>{"Highest Volume: " + maxVolume}</td>
             <tr>
             </tr>
-              <td>{"Lowest Volume Date: " + MinVolTime}</td>
+              <td>{"Lowest Volume Date: " + minVolTime}</td>
             <tr>
             </tr>
               <td>{"Lowest Volume: " + minVolume}</td>
             <tr>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Time Slice</th>
+              <th>Performance</th>
+              <th>Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{date_slices}</td>
+              <td>{performance_slices}</td>
+              <td>{volume_slices}</td>
             </tr>
           </tbody>
         </table>
