@@ -107,6 +107,7 @@ function App() {
     if (time_slice !== "Daily") {
       //get/set highest volume
       const volumesList = await getVolumeSlice();
+      setVolumeSlices(volumesList)
       const maxVol = Math.max(...volumesList);
     
       const maxVIndex = volumesList.findIndex((object) => {
@@ -149,7 +150,7 @@ function App() {
       </button>
       <div className="app-container">
       {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
-      <DataTable />
+      {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
       </div>
     </div>
   );
