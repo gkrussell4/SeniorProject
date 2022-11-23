@@ -6,6 +6,7 @@ import Select from "react-select";
 import { render } from "@testing-library/react";
 
 import { SummaryInfo } from "./components/summaryInfo.js";
+import { DataTable } from "./components/dataTable.js";
 
 const API_KEY = "0X7FGLTBB3E4SVWG";
 const API_REQUEST_BASE = "https://www.alphavantage.co/query?function="; //base of the API URL
@@ -31,15 +32,7 @@ function App() {
   const [time_frame_select, setTimeFrame] = useState(time_frame[0]);
   const [date_slices, setDateSlices] = useState(null);
   const [performance_slices, setPerformanceSlices] = useState(null);
-  const [bestPerfTime, setBestPerfTime] = useState(null);
-  const [bestPerformance, setBestPerformance] = useState(null);
-  const [worstPerfTime, setWorstPerfTime] = useState(null);
-  const [worstPerformance, setWorstPerformance] = useState(null);
   const [volume_slices, setVolumeSlices] = useState(null);
-  const [HighVolTime, setHighVolTime] = useState(null);
-  const [MinVolTime, setMinVolTime] = useState(null);
-  const [maxVolume, setMaxVolume] = useState(null);
-  const [minVolume, setMinVolume] = useState(null);
   const [summaryData, setSummaryData] = useState(null);
   const [displaySummary, setSummaryDisplay] = useState(false);
 
@@ -93,12 +86,10 @@ function App() {
     //get/set best performance
     const bestPerf = Math.max(...get_performance_slice);
     var bestPerfAppended = bestPerf.toPrecision(3);
-    setBestPerformance(bestPerfAppended);
 
     //get/set worst performance
     var worstPerf = Math.min(...get_performance_slice);
     var worstPerfAppended = worstPerf.toPrecision(3);
-    setWorstPerformance(worstPerfAppended);
 
     //get/set best time_slice
     const BestPindex = get_performance_slice.findIndex((object) => {
@@ -106,43 +97,33 @@ function App() {
     });
 
     const bestPDate = display_date_slice[BestPindex];
-    setBestPerfTime(bestPDate);
 
     //get/set worst time_slice
     const WorstPIndex = get_performance_slice.findIndex((object) => {
       return object === worstPerf;
     });
     const worstPDate = display_date_slice[WorstPIndex];
-    setWorstPerfTime(worstPDate);
 
     if (time_slice !== "Daily") {
       //get/set highest volume
       const volumesList = await getVolumeSlice();
-      setVolumeSlices(volumesList);
       const maxVol = Math.max(...volumesList);
-      setMaxVolume(maxVol);
+    
       const maxVIndex = volumesList.findIndex((object) => {
         return object === maxVol;
       });
       const maxVDate = display_date_slice[maxVIndex];
-      setHighVolTime(maxVDate);
 
       //get/set lowest volume
       const minVol = Math.min(...volumesList);
-      setMinVolume(minVol);
       const minVIndex = volumesList.findIndex((object) => {
         return object === minVol;
       });
       const minVDate = display_date_slice[minVIndex];
-      setMinVolTime(minVDate);
       setSummaryData({bpt: bestPDate, bp: bestPerfAppended,wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol})
       setSummaryDisplay(true)
-    } else {
-      setHighVolTime("API does not return volume data for Daily");
-      setMaxVolume("API does not return volume data for Daily");
-      setMinVolTime("API does not return volume data for Daily");
-      setMinVolume("API does not return volume data for Daily");
-    }
+    } 
+    
     
    
   };
@@ -168,30 +149,7 @@ function App() {
       </button>
       <div className="app-container">
       {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
-        {/* <table>
-          <thead>
-            <tr>
-              <th>
-                {ticker_select} Summary for {time_frame_select}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{"Best Date: " + bestPerfTime + "\t | Best: " + bestPerformance + "%"}</td>
-            </tr>
-            <tr>
-              <td>{"Worst Date: " + worstPerfTime + "\t | Worst: " + worstPerformance + "%"}</td>
-            </tr>
-            <tr>
-              <td>{"Highest Volume Date: " + HighVolTime + "\t | Highest Volume: " + maxVolume}</td>
-            </tr>
-            <tr>
-              <td>{"Lowest Volume Date: " + MinVolTime + "\t | Lowest Volume: " + minVolume}</td>
-            </tr>
-          </tbody>
-        </table> */}
-        
+      <DataTable />
       </div>
     </div>
   );
