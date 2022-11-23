@@ -167,23 +167,17 @@ function App() {
           </thead>
           <tbody>
             <tr>
-              <td>{"Best Date: " + bestPerfTime}</td>
+              <td>{"Best Date: " + bestPerfTime + "\t | Best: " + bestPerformance + "%"}</td>
             </tr>
             <tr>
-              <td>{"Best: " + bestPerformance + "%"}</td>
+              <td>{"Worst Date: " + worstPerfTime + "\t | Worst: " + worstPerformance + "%"}</td>
             </tr>
-            <td>{"Worst Date: " + worstPerfTime}</td>
-            <tr></tr>
-            <td>{"Worst: " + worstPerformance + "%"}</td>
-            <tr></tr>
-            <td>{"Highest Volume Date: " + HighVolTime}</td>
-            <tr></tr>
-            <td>{"Highest Volume: " + maxVolume}</td>
-            <tr></tr>
-            <td>{"Lowest Volume Date: " + MinVolTime}</td>
-            <tr></tr>
-            <td>{"Lowest Volume: " + minVolume}</td>
-            <tr></tr>
+            <tr>
+              <td>{"Highest Volume Date: " + HighVolTime + "\t | Highest Volume: " + maxVolume}</td>
+            </tr>
+            <tr>
+              <td>{"Lowest Volume Date: " + MinVolTime + "\t | Lowest Volume: " + minVolume}</td>
+            </tr>
           </tbody>
         </table>
       </div>
