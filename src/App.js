@@ -5,6 +5,8 @@ import "./App.css";
 import Select from "react-select";
 import { render } from "@testing-library/react";
 
+import { SummaryInfo } from "./components/summaryInfo.js";
+
 const API_KEY = "0X7FGLTBB3E4SVWG";
 const API_REQUEST_BASE = "https://www.alphavantage.co/query?function="; //base of the API URL
 let dates = [];
@@ -12,6 +14,8 @@ let url = ``;
 let time_slice = "";
 
 const time_frame = ["5 Minute", "15 Minute", "30 Minute", "60 Minute", "Daily"];
+
+
 
 function App() {
   //add more to ticker list later
@@ -36,6 +40,8 @@ function App() {
   const [MinVolTime, setMinVolTime] = useState(null);
   const [maxVolume, setMaxVolume] = useState(null);
   const [minVolume, setMinVolume] = useState(null);
+  const [summaryData, setSummaryData] = useState(null);
+  const [submitted, setSubmit] = useState(false);
 
   const getDateSlice = async () => {
     //fetching data
@@ -135,6 +141,8 @@ function App() {
       setMinVolTime("API does not return volume data for Daily");
       setMinVolume("API does not return volume data for Daily");
     }
+    setSummaryData({bpt: bestPerfTime, bp: bestPerformance,wpt: worstPerfTime, wp: worstPerformance, hvt: HighVolTime, hv: maxVolume, mvt: MinVolTime, mv: minVolume})
+    setSubmit(true)
   };
 
   return (
@@ -157,7 +165,8 @@ function App() {
         Submit
       </button>
       <div className="app-container">
-        <table>
+      {submitted && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
+        {/* <table>
           <thead>
             <tr>
               <th>
@@ -179,7 +188,8 @@ function App() {
               <td>{"Lowest Volume Date: " + MinVolTime + "\t | Lowest Volume: " + minVolume}</td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
+        
       </div>
     </div>
   );
