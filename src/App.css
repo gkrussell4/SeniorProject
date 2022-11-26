@@ -1,40 +1,35 @@
+.TopLayer{
+  background-color: rgb(41, 37, 28);
+}
+
 .App {
-  text-align: left;
+  text-align: center;
+  padding: 12px 256px;
+  font-family: fantasy;
+  font-size: 32px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  font-size: calc(10px + 2vmin);
+.selButton{
+  background-color: rgb(15, 3, 59);
   color: white;
+  font-family: fantasy;
 }
 
-.App-link {
-  color: #61dafb;
+.Header{
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family:'Courier New', Courier, monospace;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button{
+  background-color:rgb(15, 3, 59);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  display: inline-block;
+  font-size: 16px;
 }
 
 .app-container {
@@ -42,18 +37,20 @@
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
-  justify-content: flex-end;
 }
 
 table {
   border-collapse: collapse;
-  width:35%;
+  width:45%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 th,
 td {
   border: 1px solid #ffffff;
-  text-align: left;
+  text-align: center;
   padding: 8px;
   font-size: 18px;
   color: white;
@@ -68,16 +65,4 @@ td {
   background-color: rgb(15, 3, 59);
 }
 
-form {
-  display: flex;
-  gap: 5px;
-}
 
-form td:last-child {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-form * {
-  font-size: 28px;
-}

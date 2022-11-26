@@ -3,14 +3,13 @@ import React from "react";
 import { getDates, getVolumes, performanceFunction } from "./algorithms.js";
 import "./App.css";
 import Select from "react-select";
-import { render } from "@testing-library/react";
+
 
 import { SummaryInfo } from "./components/summaryInfo.js";
 import { DataTable } from "./components/dataTable.js";
 
 const API_KEY = "0X7FGLTBB3E4SVWG";
 const API_REQUEST_BASE = "https://www.alphavantage.co/query?function="; //base of the API URL
-let dates = [];
 let url = ``;
 let time_slice = "";
 
@@ -102,6 +101,7 @@ function App() {
     const WorstPIndex = get_performance_slice.findIndex((object) => {
       return object === worstPerf;
     });
+
     const worstPDate = display_date_slice[WorstPIndex];
 
     if (time_slice !== "Daily") {
@@ -124,38 +124,37 @@ function App() {
       setSummaryData({bpt: bestPDate, bp: bestPerfAppended,wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol})
       setSummaryDisplay(true)
     } 
-    
-    
-   
   };
 
-  return (
-    <div className="App">
-      <Select
-        options={ticker_list_display}
-        onChange={(opt) => setTicker(opt.value)}
-      ></Select>
-      <select
-        value={time_frame_select}
-        onChange={(e) => setTimeFrame(e.target.value)}
-      >
-        {time_frame.map((value) => (
-          <option value={value} key={value}>
-            {value}
-          </option>
-        ))}
-      </select>
-      <button type="button" onClick={submit}>
-        Submit
-      </button>
-      <div className="app-container">
-      {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>} 
-      {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
-      </div>
+  return(
+    <div className="TopLayer">
+        <div className= "Header">
+            <h1>DIY Stock Market Analysis</h1>
+        </div>
+        <div className= "App">
+            <Select options={ticker_list_display}
+            onChange= {(opt) => setTicker(opt.value)}
+            ></Select>
+            <select className="selButton" value={time_frame_select}
+            onChange={(e) => setTimeFrame(e.target.value)}
+            >
+                {time_frame.map((value) => (
+                    <option value={value} key={value}>
+                        {value}
+                    </option>
+                ))}
+            </select>
+            <button className="button" onClick={submit}>
+                Submit
+            </button>
+            </div>
+            <div className="app-container">
+                {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>}
+                {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
+            </div>
     </div>
-  );
+);
 }
-
 export default App;
 
 /*
