@@ -28,6 +28,4 @@ export function SummaryInfo(props) {
           </tbody>
         </table>
     )
-  
-  
   }

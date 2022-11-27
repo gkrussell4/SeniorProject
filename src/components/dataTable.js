@@ -29,7 +29,7 @@ export function DataTable(props)
     }
 
     return (
-            <table>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Time Frame</th>
@@ -39,15 +39,10 @@ export function DataTable(props)
                 </thead>
                 <tbody>
                     {
-                        // arr[0].map((item, i) => {
-                        //     //console.log(item);
-                        //     return <Row date={item} perf="Performance" vol="Volume" /> 
-                        // })
                         get_data(arr)
                     }
                 </tbody>
             </table>
-            
     )
 }
 
