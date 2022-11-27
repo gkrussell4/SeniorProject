@@ -35,7 +35,9 @@ function App() {
   const [volume_slices, setVolumeSlices] = useState(null);
   const [summaryData, setSummaryData] = useState(null);
   const [displaySummary, setSummaryDisplay] = useState(false);
-  const [is_daily, setDaily] = useState(false); 
+  const [is_daily, setDaily] = useState(false);
+  const [show_welcome, setWelcome] = useState(true); 
+  const [show_table, setTable] = useState(false); 
 
   const getDateSlice = async () => {
     //fetching data
@@ -63,8 +65,10 @@ function App() {
   }
 
   const submit = async () => {
-
-    setDaily(false); 
+    setWelcome(false); 
+    setDaily(false);
+    setSummaryDisplay(false); 
+    setTable(false); 
     if (time_frame_select === "5 Minute") {
       time_slice = "5min";
     } else if (time_frame_select === "15 Minute") {
@@ -178,6 +182,7 @@ function App() {
       setSummaryData({ bpt: bestPDate, bp: bestPerfAppended, wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol, fha: firstHourAvg, cha: closeHourAvg })
       setSummaryDisplay(true)
     }
+    setTable(true); 
   };
 
   return (
@@ -206,9 +211,9 @@ function App() {
       </div>
       <div className="tableMove">
         {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData} />}
-        {displaySummary && !is_daily && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
+        {show_table && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
       </div>
-      {!displaySummary && <div className="welcome-container">
+      {show_welcome && <div className="welcome-container">
                               <Welcome className="welcome"/>
                           </div>}
     </div>
