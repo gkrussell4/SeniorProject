@@ -1,5 +1,8 @@
+
+
 .TopLayer{
   background-color: rgb(23, 27, 36);
+  margin: 0; 
 }
 
 .App {
@@ -15,6 +18,15 @@
   text-align: center;
   justify-content: center;
 }
+
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  margin-top: 10pt;
+  padding-top: 100pt;
+}
+
 
 .selButton{
   background-color: rgb(15, 3, 59);
