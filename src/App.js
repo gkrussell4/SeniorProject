@@ -135,6 +135,8 @@ function App() {
             <Select options={ticker_list_display}
             onChange= {(opt) => setTicker(opt.value)}
             ></Select>
+        </div>
+        <div className="buttonLayer">
             <select className="selButton" value={time_frame_select}
             onChange={(e) => setTimeFrame(e.target.value)}
             >
@@ -144,14 +146,14 @@ function App() {
                     </option>
                 ))}
             </select>
-            <button className="button" onClick={submit}>
+            <button className="submitButton" onClick={submit}>
                 Submit
             </button>
-            </div>
-            <div className="app-container">
-                {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>}
-                {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
-            </div>
+          </div>
+          <div className="app-container">
+              {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>}
+              {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
+          </div>
     </div>
 );
 }
