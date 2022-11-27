@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { getDates, getVolumes, performanceFunction } from "./algorithms.js";
+import { getDates, getVolumes, hoursPerformance, performanceFunction } from "./algorithms.js";
 import "./App.css";
 import Select from "react-select";
 
@@ -39,7 +39,6 @@ function App() {
     //fetching data
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return getDates(time_slice, data);
   };
 
@@ -54,6 +53,12 @@ function App() {
     const data = await response.json();
     return getVolumes(time_slice, data);
   };
+
+  const test = async () => {
+    const r = await fetch(`${API_REQUEST_BASE}TIME_SERIES_INTRADAY&symbol=${ticker_select}&interval=30min&outputsize=full&apikey=0X7FGLTBB3E4SVWG`);
+    const d = await r.json();
+    return d;
+  }
 
   const submit = async () => {
     if (time_frame_select === "5 Minute") {
@@ -104,15 +109,57 @@ function App() {
 
     const worstPDate = display_date_slice[WorstPIndex];
 
+
+
+    //Retrieving 30min time slices for First & Last HourAvgs Function
+    const hourAvgs = await test();
+    console.log(hourAvgs);
+    let T = getDates("30min", hourAvgs); //array with dates n hours of 30min
+    let PerfThirty = hoursPerformance("30min", hourAvgs);
+    console.log(PerfThirty);
+    let timeHours = [];
+    let openPerfHour = [];
+    let closePerfHour = [];
+    let j = 0;
+    let k = 0;
+    for (var i = 0; i < T.length; i++) {
+      timeHours.push(T[i].substring(11, 19));
+    }
+    for (var i = 0; i < timeHours.length; i++) {
+      if (timeHours[i] === "09:30:00") {
+        openPerfHour[j] = PerfThirty[i];
+        j++;
+      } else if (timeHours[i] === "15:00:00") {
+        closePerfHour[k] = PerfThirty[i];
+        k++;
+      }
+    }
+    var sum = 0;
+    for (var n of openPerfHour) {
+      sum += n;
+    }
+    var firstHourAvg = (sum / openPerfHour.length).toPrecision(3);
+    console.log(firstHourAvg);
+
+    var sum0 = 0;
+    for (var n of closePerfHour) {
+      sum0 += n;
+    }
+    var closeHourAvg = (sum0 / closePerfHour.length).toPrecision(3);
+    console.log(closeHourAvg);
+
+
+
     if (time_slice !== "Daily") {
       //get/set highest volume
       const volumesList = await getVolumeSlice();
       setVolumeSlices(volumesList)
       const maxVol = Math.max(...volumesList);
-    
+
       const maxVIndex = volumesList.findIndex((object) => {
         return object === maxVol;
       });
+
       const maxVDate = display_date_slice[maxVIndex];
 
       //get/set lowest volume
@@ -120,42 +167,43 @@ function App() {
       const minVIndex = volumesList.findIndex((object) => {
         return object === minVol;
       });
+
       const minVDate = display_date_slice[minVIndex];
-      setSummaryData({bpt: bestPDate, bp: bestPerfAppended,wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol})
+      setSummaryData({ bpt: bestPDate, bp: bestPerfAppended, wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol, fha: firstHourAvg, cha: closeHourAvg })
       setSummaryDisplay(true)
-    } 
+    }
   };
 
-  return(
+  return (
     <div className="TopLayer">
-        <div className= "Header">
-            <h1>DIY Stock Market Analysis</h1>
-        </div>
-        <div className= "App">
-            <Select options={ticker_list_display}
-            onChange= {(opt) => setTicker(opt.value)}
-            ></Select>
-        </div>
-        <div className="buttonLayer">
-            <select className="selButton" value={time_frame_select}
-            onChange={(e) => setTimeFrame(e.target.value)}
-            >
-                {time_frame.map((value) => (
-                    <option value={value} key={value}>
-                        {value}
-                    </option>
-                ))}
-            </select>
-            <button className="submitButton" onClick={submit}>
-                Submit
-            </button>
-          </div>
-          <div className="app-container">
-              {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData}/>}
-              {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)}/>}
-          </div>
+      <div className="Header">
+        <h1>DIY Stock Market Analysis</h1>
+      </div>
+      <div className="App">
+        <Select options={ticker_list_display}
+          onChange={(opt) => setTicker(opt.value)}
+        ></Select>
+      </div>
+      <div className="buttonLayer">
+        <select className="selButton" value={time_frame_select}
+          onChange={(e) => setTimeFrame(e.target.value)}
+        >
+          {time_frame.map((value) => (
+            <option value={value} key={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        <button className="submitButton" onClick={submit}>
+          Submit
+        </button>
+      </div>
+      <div className="tableMove">
+        {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData} />}
+        {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
+      </div>
     </div>
-);
+  );
 }
 export default App;
 

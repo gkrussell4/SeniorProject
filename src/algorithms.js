@@ -4,7 +4,6 @@ export function getDates(time_slice, data) {
   for (var key in data[`Time Series (${time_slice})`]) {
     parsed.unshift(key);
   }
-  console.log(typeof parsed[1] + parsed[1]);
   return parsed;
 }
 
@@ -49,6 +48,20 @@ export function performanceFunction(time_slice, data) {
     if (minPerformance[0] === performance[i]) {
       minPerformance[1] = i;
     }
+  }
+  return performance;
+}
+
+export function hoursPerformance(time_slice, data) {
+  let parsed = [];
+  for (var key in data[`Time Series (${time_slice})`]) {
+    parsed.unshift(data[`Time Series (${time_slice})`][key]["1. open"]);
+  }
+
+  var performance = [];
+
+  for (let i = 0; i < parsed.length - 1; i++) {
+    performance[i] = ((parsed[i + 2] - parsed[i]) * 100) / parsed[i];
   }
   return performance;
 }

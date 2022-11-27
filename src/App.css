@@ -1,5 +1,5 @@
 .TopLayer{
-  background-color: rgb(41, 37, 28);
+  background-color: rgb(23, 27, 36);
 }
 
 .App {
@@ -42,7 +42,7 @@
   font-size: 16px;
 }
 
-.app-container {
+.tableMove {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -54,7 +54,7 @@ table {
   width:48%;
   margin-left: auto;
   margin-right: auto;
-  font-family:'SF Mono', monospace;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 th,
@@ -73,6 +73,14 @@ th {
 
 td {
   background-color: rgb(15, 3, 59);
+}
+
+td1{
+  color: rgb(6, 240, 6);
+}
+
+td2{
+  color: red;
 }
 
 
