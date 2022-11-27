@@ -4,15 +4,24 @@
 
 .App {
   text-align: center;
-  padding: 12px 256px;
-  font-family: fantasy;
+  padding: 12px 500px;
+  font-family:'SF Mono', monospace;
   font-size: 32px;
+  justify-content: center;
+}
+
+.buttonLayer{
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .selButton{
   background-color: rgb(15, 3, 59);
   color: white;
-  font-family: fantasy;
+  border: ridge;
+  padding: 1px 12px;
+  font-size: 16px;
 }
 
 .Header{
@@ -23,11 +32,12 @@
   font-family:'Courier New', Courier, monospace;
 }
 
-.button{
+.submitButton{
   background-color:rgb(15, 3, 59);
-  border: none;
+  border: ridge;
+  border-color: white;
   color: white;
-  padding: 10px 16px;
+  padding: 0px 12px;
   display: inline-block;
   font-size: 16px;
 }
@@ -41,10 +51,10 @@
 
 table {
   border-collapse: collapse;
-  width:45%;
+  width:48%;
   margin-left: auto;
   margin-right: auto;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:'SF Mono', monospace;
 }
 
 th,
