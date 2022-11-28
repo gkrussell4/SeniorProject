@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { getDates, getVolumes, hoursPerformance, performanceFunction } from "./algorithms.js";
+import { Welcome } from "./components/defaultWelcome.js";
 import "./App.css";
 import Select from "react-select";
 
@@ -34,6 +35,9 @@ function App() {
   const [volume_slices, setVolumeSlices] = useState(null);
   const [summaryData, setSummaryData] = useState(null);
   const [displaySummary, setSummaryDisplay] = useState(false);
+  const [is_daily, setDaily] = useState(false);
+  const [show_welcome, setWelcome] = useState(true); 
+  const [show_table, setTable] = useState(false); 
 
   const getDateSlice = async () => {
     //fetching data
@@ -61,6 +65,10 @@ function App() {
   }
 
   const submit = async () => {
+    setWelcome(false); 
+    setDaily(false);
+    setSummaryDisplay(false); 
+    setTable(false); 
     if (time_frame_select === "5 Minute") {
       time_slice = "5min";
     } else if (time_frame_select === "15 Minute") {
@@ -71,8 +79,9 @@ function App() {
       time_slice = "60min";
     } else {
       time_slice = "Daily";
+      setDaily(true); 
     }
-
+    console.log(time_slice); 
     if (time_slice === "Daily") {
       url = `${API_REQUEST_BASE}TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker_select}&apikey=0X7FGLTBB3E4SVWG`;
     } else {
@@ -81,6 +90,7 @@ function App() {
 
     //get/set date slices
     const display_date_slice = await getDateSlice();
+    console.log(display_date_slice); 
     setDateSlices(display_date_slice);
 
     //get/set performance array
@@ -172,6 +182,7 @@ function App() {
       setSummaryData({ bpt: bestPDate, bp: bestPerfAppended, wpt: worstPDate, wp: worstPerfAppended, hvt: maxVDate, hv: maxVol, mvt: minVDate, mv: minVol, fha: firstHourAvg, cha: closeHourAvg })
       setSummaryDisplay(true)
     }
+    setTable(true); 
   };
 
   return (
@@ -200,9 +211,13 @@ function App() {
       </div>
       <div className="tableMove">
         {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData} />}
-        {displaySummary && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
+        {show_table && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
       </div>
+      {show_welcome && <div className="welcome-container">
+                              <Welcome className="welcome"/>
+                          </div>}
     </div>
+    
   );
 }
 export default App;
