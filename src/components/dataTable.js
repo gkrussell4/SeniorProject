@@ -6,10 +6,13 @@ function Row(props) {
         <tr>
             <td>{props.date}</td>
             <td>{colorPerf(props)}</td>
+            { !props.daily &&
             <td>{props.vol}</td>
+            }
         </tr>
     )
 }
+
 
 //td1 = positive, td2 = negative, td3 = neutral
 function colorPerf(props) {
@@ -32,7 +35,11 @@ export function DataTable(props) {
             total_rows = 250
 
         for (let i = 0; i < total_rows; i++)
-            final_data.push(<Row key={i} date={data[0][i]} perf={data[1][i].toPrecision(3)} vol={data[2][i]} />)
+            if (props.daily != true) {
+                final_data.push(<Row key={i} daily={props.daily} date={data[0][i]} perf={data[1][i].toPrecision(3)} vol={data[2][i]} />)
+            }else{
+                final_data.push(<Row key={i} daily={props.daily} date={data[0][i]} perf={data[1][i].toPrecision(3)} />)
+            }
 
         return final_data;
     }
@@ -43,7 +50,8 @@ export function DataTable(props) {
                 <tr>
                     <th>Time Frame</th>
                     <th>Performance</th>
-                    <th>Volume</th>
+                    {!props.daily &&
+                    <th>Volume</th>} 
                 </tr>
             </thead>
             <tbody>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { getDates, getVolumes, hoursPerformance, performanceFunction } from "./algorithms.js";
 import { Welcome } from "./components/defaultWelcome.js";
+import { DailyTable } from "./components/dailyTable.js";
 import "./App.css";
 import Select from "react-select";
 
@@ -211,7 +212,8 @@ function App() {
       </div>
       <div className="tableMove">
         {displaySummary && <SummaryInfo ticker={ticker_select} time_select={time_frame_select} data={summaryData} />}
-        {show_table && <DataTable data={Array(date_slices, performance_slices, volume_slices)} />}
+        {show_table && !is_daily && <DataTable daily={is_daily} data={Array(date_slices, performance_slices, volume_slices)} />}
+        {show_table && is_daily && <DailyTable data={Array(date_slices, performance_slices)}/>}
       </div>
       {show_welcome && <div className="welcome-container">
                               <Welcome className="welcome"/>
