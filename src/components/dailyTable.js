@@ -43,10 +43,8 @@ export function DailyTable(props) {
         <table className="table">
             <thead>
                 <tr>
-                    Time Performance
-                </tr>
-                <tr>
-                    Performance
+                <th>Time Frame</th>
+                <th>Performance</th>
                 </tr>
             </thead>
             {
